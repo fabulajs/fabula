@@ -9,7 +9,7 @@
 
 .fblChildren {
     padding: var(--xxs);
-    border-left: 2px solid var(--gray300);
+    border-left: 1px solid var(--gray200);
     margin-bottom: var(--xs);
 }
 .fblChildren:empty {
@@ -22,4 +22,18 @@
 .fblSubmit .lstBtn:not([disabled]) {
     background-color: var(--gray700);
     color: white;
+}
+
+.fblWr {
+    display: flex;
+}
+.fblSidebar {
+    display: contents;
+    height: 100%;
+
+}
+.fblSidebar .lstSidebar {
+    border-left: 1px solid var(--gray200);
+    width: 560px;
+    top: var(--vs);
 }

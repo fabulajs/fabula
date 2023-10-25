@@ -1,0 +1,79 @@
+.lstSidebar {
+  width: 210px;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  display: none;
+  height: 100%;
+  padding: var(--xxs);
+}
+
+.lstSidebarWr {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lstSidebarWr [section="content"] {
+  padding: var(--xs) 0;
+}
+
+.lstSidebar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.lstSidebar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.lstSidebar::-webkit-scrollbar-thumb {
+  background-color: var(--gray300);
+  border-radius: 1px;
+}
+
+.lstSidebar .content {
+  width: 100%;
+  transition: width .3s .2s;
+  right: 0;
+  display: grid;
+}
+.lstSidebar.show {
+  display: block;
+}
+
+.lstSidebar .lstClose {
+  display: none;
+  height: var(--s);
+  width: var(--s);
+  border-radius: 50%;
+  margin-top: var(--xxs);
+  font-weight: 600;
+}
+
+.lstSidebar.mini {
+  width: 56px;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* tablet */
+.tablet.lstSidebar {
+  position: fixed;
+  width: 100vw;
+  max-height: 100vh !important;
+  inset: 0;
+  z-index: 100;
+  background-color: var(--bg-primary);
+  padding: var(--s) var(--xs);
+}
+
+.tablet.lstSidebar .lstClose {
+  margin: var(--xs) var(--xs);
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+.tablet .lstSidebarWr {
+  margin-top: var(--s);
+}

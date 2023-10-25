@@ -24,6 +24,9 @@ export default {
       change: {}
     }
   },
+  params: {
+    windowType: 'dialog'
+  },
   sources: {
     popup: () => import('./popup')
   },
@@ -49,26 +52,28 @@ export default {
           },
           methods: {
             change: async () => {
-              await this.bus.popup.section.content.mount({
+              await this.bus[this.param.windowType].section.content.mount({
                 src: this.source.popup,
                 params: {
                   text: this.param.text,
                   list: this.param.options.list,
-                  buttonsText: () => this.param.options.buttonsText || this.localTokens
+                  buttonsText: () => this.bus.local
                 },
                 proxies: {
                   list: this.param.options.list,
                   selected: this.proxy.value,
                 },
                 methods: {
-                  apply: (arr) => {
+                  onapply: (arr) => {
                     this.method.change?.(arr)
-                    this.bus.popup.method.close()
+                    this.bus[this.param.windowType].method.close()
+                  },
+                  onclose: () => {
+                    this.bus[this.param.windowType].method.close()
                   }
                 }
               })
-              this.bus.popup.method.fullScreen(true)
-              this.bus.popup.method.open()
+              this.bus[this.param.windowType].method.open()
             }
           }
         }
@@ -82,5 +87,8 @@ export default {
     render() {
       return this.proxy.value.reduce((accum, el) => accum + `<span class="l-br" size="mini">${el}</span>`, '')
     }
+  },
+  created() {
+    if (this.param.options.windowType) this.param.windowType = this.param.options.windowType
   }
 }

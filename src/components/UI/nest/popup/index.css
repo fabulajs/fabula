@@ -25,13 +25,11 @@
 }
 
 .lstPopupList li {
-    width: 25%;
     cursor: pointer;
     text-transform: capitalize;
 }
 .lstPopupList li.active {
-    background-color: var(--gray700);
-    color: white;
+    background-color: var(--gray100);
 }
 
 .lstPopupList li.active:after {

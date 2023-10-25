@@ -8,33 +8,37 @@ export default {
   </dialog>`,
   props: {
     proxies: {
-      fullScreen: {}
+      maximize: {},
+      opened: {},
     },
     methods: {
       onclose: {}
+    }
+  },
+  handlers: {
+    opened(v) {
+        v ? this.node.lstDialog.showModal() : this.node.lstDialog.close()
     }
   },
   nodes() {
     return {
       lstDialog: {
         _class: {
-          'l-full-screen': () => this.proxy.fullScreen
+          'l-full-screen': () => this.proxy.maximize
         }
       },
       lstClose: {
-        onclick: () => this.method.onclose ? this.method.onclose() : this.method.close()
+        onclick: () => this.method.close()
       }
     }
   },
   methods: {
-    close() {
-      this.node.lstDialog.close()
-    },
     open() {
-      this.node.lstDialog.showModal()
+      this.proxy.opened = true
     },
-    fullScreen(v) {
-      this.proxy.fullScreen = v
+    close() {
+      this.proxy.opened = false
+      this.method.onclose && this.method.onclose()
     }
   }
 }

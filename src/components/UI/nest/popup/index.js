@@ -28,7 +28,8 @@ export default {
       selected: {}
     },
     methods: {
-      apply: {}
+      onapply: {},
+      onclose: {}
     }
   },
   proxies: {
@@ -87,7 +88,7 @@ export default {
             text: () => this.param.buttonsText?.apply || `Apply`
           },
           methods: {
-            change: () => this.method.apply && this.method.apply(this.proxy.selected)
+            change: () => this.method.onapply && this.method.onapply(this.proxy.selected)
           }
         }
       },
@@ -98,7 +99,7 @@ export default {
             text: () => this.param.buttonsText?.cancel || `Cancel`
           },
           methods: {
-            change: () => this.bus.popup.method.close()
+            change: () => this.method.onclose()
           }
         }
       }

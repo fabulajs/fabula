@@ -5,7 +5,6 @@
     max-width: 768px;
     background-color: #ffffff;
     border: 0;
-    border-radius: 2px;
     max-height: calc(100vh - (var(--xs) * 2));
     padding: var(--xs);
     padding-top: 0;

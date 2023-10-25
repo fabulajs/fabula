@@ -3,10 +3,9 @@ import './styles.css'
 import main from './components/main'
 
 export default {
-    entry: {},
     app: {},
     method: {},
-    create: function ({ createApp, deliver, replicate }, root, entry) {
+    create: function ({ createApp, deliver, replicate }, root) {
         const rootContainer = document.querySelector(root)
         rootContainer.classList.add('lstUI')
         const fabula = this
@@ -41,8 +40,8 @@ export default {
                             this.param.errors[key] = value
                             this.proxy.error = Object.values(this.param.errors).includes(true)
                         },
-                        submit() {
-                            entry.send(replicate(this.proxy._values))
+                        async submit() {
+                            return await this.bus.entry.send(replicate(this.proxy._values))
                         }
                     },
                     created() {
@@ -58,9 +57,10 @@ export default {
                     buttons: () => import('./components/UI/buttons'),
                     nest: () => import('./components/UI/nest')
                 },
-                entry: entry,
-                localTokens: entry.localTokens,
-                bus: { popup: {} },
+                bus: {
+                    entry: {},
+                    local: {}
+                },
                 execute({_values, path, value, direction}) {
                     const command = 'return ' + direction
                     const pathClone = [...path]
@@ -79,7 +79,9 @@ export default {
             }
         })
     },
-    init: async function () {
+    init: async function (entry) {
+        this.app.plugins.bus.entry = entry
+        this.app.plugins.bus.local = entry.local
         await this.app.mount(main)
     },
     destroy: async function () {

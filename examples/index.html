@@ -19,9 +19,9 @@
     <body>
         <div id="root"></div>
         <script type="module">
-          import entry from './first'
-          fabula.create(lesta, '#root', entry)
-          fabula.init()
+          import entry from './config/index.js'
+          fabula.create(lesta, '#root')
+          fabula.init(entry)
         </script>
     </body>
 </html>

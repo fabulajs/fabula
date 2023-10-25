@@ -1,14 +1,19 @@
 import block from '../block'
 import button from '../UI/button'
 import dialog from '../UI/dialog'
+import sidebar from '../UI/sidebar'
+import notify from '../notify'
 
 export default {
   template: `
-    <div class="fblDialog"></div>
-    <div class="fblMain l-container l-content">
-      <h2 class="fblMainHead"></h2>
-      <div class="fblForm"></div>
-      <div class="fblSubmit"></div>
+    <div class="fblWr">
+      <div class="fblDialog"></div>
+      <div class="fblMain l-container l-content">
+        <h2 class="fblMainHead"></h2>
+        <div class="fblForm"></div>
+        <div class="fblSubmit"></div>
+      </div>
+      <div class="fblSidebar"></div>
     </div>`,
   props: {
     proxies: {
@@ -18,16 +23,19 @@ export default {
       submit: { store: 'form' }
     }
   },
+  proxies: {
+    message: ''
+  },
   nodes() {
     return {
       fblMainHead: {
-        textContent: this.entry.mainHead
+        textContent: this.bus.entry.mainHead
       },
       fblForm: {
         component: {
           src: block,
           params: {
-            target: this.entry.form,
+            target: this.bus.entry.form,
             path: []
           }
         }
@@ -36,14 +44,24 @@ export default {
         component: {
           src: button,
           params: {
-            text: this.entry.localTokens.submit,
+            text: this.bus.local.submit,
             size: 'normal'
           },
           proxies: {
-            disabled: () => this.proxy.error
+            // disabled: () => this.proxy.error
           },
           methods: {
-            change: () =>this.method.submit(),
+            change: async () => {
+              this.proxy.message = this.bus.entry.local.request
+              await this.bus.dialog.section.content.mount({
+                src: notify,
+                proxies: {
+                  message: () => this.proxy.message
+                }
+              })
+              this.bus.dialog.method.open()
+              this.proxy.message = await this.method.submit()
+            }
           }
         }
       },
@@ -54,10 +72,19 @@ export default {
             content: {}
           }
         }
-      }
+      },
+      fblSidebar: {
+        component: {
+          src: sidebar,
+          sections: {
+            content: {}
+          }
+        }
+      },
     }
   },
   mounted() {
-    this.bus.popup = this.node.fblDialog
+    this.bus.dialog = this.node.fblDialog
+    this.bus.sidebar = this.node.fblSidebar
   }
 }

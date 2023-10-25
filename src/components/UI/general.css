@@ -94,8 +94,15 @@
     margin-bottom: 1em;
 }
 
+.lstUI ul {
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(16ch, 1fr));
+    display: grid;
+}
+
 .lstUI li {
     list-style-type: none;
+    min-width: 16ch;
 }
 
 .lstUI button {
@@ -178,20 +185,6 @@
 }
 .l-ai-c {
     align-items: center;
-}
-.l-scr {
-    display: flex;
-    height: 100vh;
-    overflow: hidden auto;
-}
-.l-scr > * {
-    min-height: 100vh;
-}
-.l-scr > *:has(.lstSidebar) {
-    display: contents;
-}
-.l-conts {
-    display: contents;
 }
 
 .l-field {
