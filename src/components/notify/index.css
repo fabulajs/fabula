@@ -9,7 +9,10 @@
     backdrop-filter: blur(4px);
 }
 .fblNtfBtns {
-    margin-top: var(--s);
+    padding-top: var(--s);
+}
+.fblNtfBtns:empty {
+    display: none;
 }
 .fblNtfBtns .lstBtns {
     justify-content: center;

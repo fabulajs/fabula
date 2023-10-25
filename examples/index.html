@@ -19,9 +19,12 @@
     <body>
         <div id="root"></div>
         <script type="module">
-          import entry from './config/index.js'
           fabula.create(lesta, '#root')
-          fabula.init(entry)
+          fetch('/form.json')
+          .then(res => res.json())
+          .then(entry => {
+            fabula.init(entry)
+          })
         </script>
     </body>
 </html>

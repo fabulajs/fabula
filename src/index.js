@@ -41,7 +41,18 @@ export default {
                             this.proxy.error = Object.values(this.param.errors).includes(true)
                         },
                         async submit() {
-                            return await this.bus.entry.send(replicate(this.proxy._values))
+                            const { url, method, headers } = this.bus.entry.server
+                            try {
+                                const res = await fetch(url, {
+                                    method,
+                                    headers,
+                                    body: JSON.stringify(this.proxy._values)
+                                })
+                                const obj = await res.json()
+                                return obj.message || this.bus.local.sentMessage
+                            } catch (err) {
+                                return this.bus.local.errorMessage
+                            }
                         },
                         async clear() {
                             await this.destroy()

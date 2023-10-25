@@ -81,6 +81,9 @@ export default {
               this.proxy.message = this.bus.entry.local.clearMessage
               await this.bus.dialog.section.content.mount({
                 src: notify,
+                params: {
+                  dialog: true
+                },
                 proxies: {
                   message: () => this.proxy.message
                 },

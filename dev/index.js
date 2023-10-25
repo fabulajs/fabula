@@ -1,4 +1,7 @@
 import fabula from '../src'
-import entry from '../examples/config/index.js'
 fabula.create(lesta, '#root')
-fabula.init(entry)
+fetch('/form.json')
+.then(res => res.json())
+.then(entry => {
+  fabula.init(entry)
+})

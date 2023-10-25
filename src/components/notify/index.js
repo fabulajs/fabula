@@ -4,9 +4,12 @@ import buttons from '../UI/buttons'
 export default {
   template: `<div class="fblNtf">
     <div class="fblNtfCont"></div>
-    <div class="fblNtfBtns">sfsfgsgs</div>
+    <div class="fblNtfBtns"></div>
   </div>`,
   props: {
+    params: {
+      dialog: {}
+    },
     proxies: {
       message: {}
     },
@@ -21,6 +24,7 @@ export default {
       },
       fblNtfBtns : {
         component: {
+          induce: () => this.param.dialog,
           src: buttons,
           proxies: {
             value: () => this.bus.local.cancel,
