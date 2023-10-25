@@ -11,7 +11,10 @@ export default {
       <div class="fblMain l-container l-content">
         <h2 class="fblMainHead"></h2>
         <div class="fblForm"></div>
-        <div class="fblSubmit"></div>
+        <div class="l-fx l-gap">
+            <div class="fblClear"></div>
+            <div class="fblSubmit"></div>
+        </div>
       </div>
       <div class="fblSidebar"></div>
     </div>`,
@@ -20,7 +23,8 @@ export default {
       error: { store: 'form' }
     },
     methods: {
-      submit: { store: 'form' }
+      submit: { store: 'form' },
+      clear: { store: 'form' }
     }
   },
   proxies: {
@@ -48,11 +52,11 @@ export default {
             size: 'normal'
           },
           proxies: {
-            // disabled: () => this.proxy.error
+            disabled: () => this.proxy.error
           },
           methods: {
             change: async () => {
-              this.proxy.message = this.bus.entry.local.request
+              this.proxy.message = this.bus.entry.local.requestMessage
               await this.bus.dialog.section.content.mount({
                 src: notify,
                 proxies: {
@@ -61,6 +65,32 @@ export default {
               })
               this.bus.dialog.method.open()
               this.proxy.message = await this.method.submit()
+            }
+          }
+        }
+      },
+      fblClear: {
+        component: {
+          src: button,
+          params: {
+            text: this.bus.local.clear,
+            size: 'normal'
+          },
+          methods: {
+            change: async () => {
+              this.proxy.message = this.bus.entry.local.clearMessage
+              await this.bus.dialog.section.content.mount({
+                src: notify,
+                proxies: {
+                  message: () => this.proxy.message
+                },
+                methods: {
+                  confirm: () => {
+                    this.method.clear()
+                  }
+                }
+              })
+              this.bus.dialog.method.open()
             }
           }
         }

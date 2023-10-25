@@ -2,17 +2,17 @@
     padding: .1em;
     min-width: 10ch;
     width: fit-content;
-    gap: 1px;
+    gap: .1em;
 }
 .lstNstBtn button {
-    border: 1px solid var(--gray);
-    background-color: var(--gray100);
+    border: 1px solid var(--gray200);
+    background-color: var(--white100);
 }
 .lstNst .lstNstCont {
     gap: .1em;
 }
-.lstNstErr {
-    border: 1px solid var(--red);
+.lstNst.lstNstErr {
+    border-color: var(--red);
 }
 .lstNstCont > span {
     background-color: var(--gray);

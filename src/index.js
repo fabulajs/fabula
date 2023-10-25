@@ -42,7 +42,14 @@ export default {
                         },
                         async submit() {
                             return await this.bus.entry.send(replicate(this.proxy._values))
+                        },
+                        async clear() {
+                            await this.destroy()
+                            this.param.error = {}
+                            this.proxy._values = {}
+                            await this.update()
                         }
+                        
                     },
                     created() {
                         Object.assign(fabula.method, this.method)
@@ -82,7 +89,9 @@ export default {
     init: async function (entry) {
         this.app.plugins.bus.entry = entry
         this.app.plugins.bus.local = entry.local
-        await this.app.mount(main)
+        this.app.plugins.destroy = async () => this.app.root.unmount && await this.app.unmount()
+        this.app.plugins.update = async () => await this.app.mount(main)
+        this.app.plugins.update()
     },
     destroy: async function () {
         await this.app.unmount()

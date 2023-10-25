@@ -16,10 +16,7 @@
     display: none;
 }
 
-.fblSubmit .lstBnt {
-    margin-left: auto;
-}
-.fblSubmit .lstBtn:not([disabled]) {
+.fblSubmit .lstBtn {
     background-color: var(--gray700);
     color: white;
 }
@@ -36,4 +33,8 @@
     border-left: 1px solid var(--gray200);
     width: 560px;
     top: var(--vs);
+}
+
+.fblWr .l-field[type="number"] {
+    width: 10ch;
 }

@@ -42,7 +42,7 @@ export default {
           if (event.target.closest('.lstBtns > button')) {
             const index = +event.target.dataset.index
             const buttons = this.param.options.buttons || this.proxy.value
-            this.method.change(buttons[index], index)
+            this.method.change && this.method.change(buttons[index], index)
           }
         }
       }

@@ -23,6 +23,9 @@
     margin-right: .8em;
     margin-left: -2.2em;
 }
+.lstBtns > button:active {
+    font-weight: 600;
+}
 
 .lstBtns > button.active {
     font-weight: 600;

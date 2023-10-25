@@ -5,7 +5,7 @@ import general from "../general"
 
 export default {
   template: `
-    <div class="l-fx l-fx-bl">
+    <div class="l-fx l-ai-s">
       <h4 class="fblHead"></h4>
       <div class="fblPanel l-fx">
           <div class="fblDec"></div>
@@ -51,7 +51,7 @@ export default {
             change: () => {
               this.method.remove({ path: this.param.path })
               this.method.error({ key: [...this.param.path, this.deliver(this.proxy._values, [...this.param.path, 'length'])].join('_'), value: false })
-            },
+            }
           }
         }
       },

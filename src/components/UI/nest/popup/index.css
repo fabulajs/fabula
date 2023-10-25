@@ -52,7 +52,6 @@
 .lstPopupResult .lstBtns > button {
     background-color: var(--gray);
     border: 1px solid var(--gray100);
-    border-radius: 6px;
     font-weight: normal;
 }
 .lstPopupResult .lstBtns {

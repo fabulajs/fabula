@@ -7,9 +7,12 @@ export default {
     cancel: 'Отменить',
     apply: 'Применить',
     submit: 'Отправить',
-    request: 'Отправка...',
-    sent: 'Успешно отправлено.',
-    error: 'Ошибка'
+    clear: 'Отчистить',
+    confirm: 'Подтвердить',
+    requestMessage: 'Отправка...',
+    sentMessage: 'Успешно отправлено.',
+    errorMessage: 'Ошибка',
+    clearMessage: 'Вы хотите очистить все поля в форме?',
   },
   send: async function (values) {
     try {
@@ -22,9 +25,9 @@ export default {
         body: JSON.stringify(values)
       })
       const obj = await res.json()
-      return obj.message || this.local.sent
+      return obj.message || this.local.sentMessage
     } catch (err) {
-      return this.local.error
+      return this.local.errorMessage
     }
   }
 }

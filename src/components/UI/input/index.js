@@ -35,7 +35,7 @@ export default {
       },
       lstInput: {
         _class: {
-          LstInputError: () => this.proxy.error
+          lstInputError: () => this.proxy.error
         },
         _attr: {
           size: this.param.size,
@@ -50,17 +50,11 @@ export default {
         type: this.param.type,
         name: this.param.name,
         placeholder: this.param.options.placeholder ?? '',
-        value: () => {
-          const v = this.param.type === 'number' ? Number(this.proxy.value) : this.proxy.value
-          return this.param.options.fixed ? v.toFixed(2) : v
-        },
+        value: () => this.proxy.value,
         disabled: () => this.proxy.disabled,
         onfocus: () => this.method.onfocus && this.method.onfocus(this.proxy.value),
         onblur: () => this.method.onblur && this.method.onblur(this.proxy.value),
-        oninput: this.debounce((event) => {
-          this.proxy.value = event.target.value
-          this.method.change && this.method.change(event.target.value)
-        }, 300)
+        oninput: () => this.method.change && this.method.change(event.target.value)
       }
     }
   },
@@ -80,8 +74,5 @@ export default {
     select() {
       this.node.lstInput.select()
     }
-  },
-  mounted() {
-    this.param.options.width && this.node.lstInput.style.setProperty('--width', this.param.options.width)
   }
 }

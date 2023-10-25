@@ -2,7 +2,6 @@
   display: flex;
   line-height: 1;
   font-size: var(--fs-xs);
-  background-color: var(--gray100);
   color: inherit;
   overflow: hidden;
   align-items: center;
