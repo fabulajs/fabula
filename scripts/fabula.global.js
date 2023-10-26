@@ -1,3 +1,3 @@
-import fabula from '../src'
+import { createForm, jsonToFormData } from '../src'
 
-window.fabula = fabula
+window.fabula = { createForm, jsonToFormData }
