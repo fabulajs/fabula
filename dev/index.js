@@ -5,13 +5,13 @@ const form = createForm({
   elements: {
     custom: () => {}
   },
-  async onRequest(data) {
-    console.log(data)
-    // for (const pair of jsonToFormData(data).entries()) {
-    //   console.log(pair.at(0)+ ' - ' + pair.at(1))
-    // }
-    // return jsonToFormData(data) // default JSON.stringify(data)
-  },
+  // async onRequest(data) {
+  //   console.log(data)
+  //   // for (const pair of jsonToFormData(data).entries()) {
+  //   //   console.log(pair.at(0)+ ' - ' + pair.at(1))
+  //   // }
+  //   // return jsonToFormData(data) // default JSON.stringify(data)
+  // },
   async onResponse(res) {
     console.log(res)
     // await res.json()

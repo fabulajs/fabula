@@ -29,6 +29,7 @@ export default function store(deliver, replicate, form, onRequest, onResponse) {
       },
       async submit() {
         const { url, method, headers } = this.bus.entry.server
+        console.log(url, method, headers)
         try {
           let body = onRequest ? await onRequest(replicate(this.proxy._values)) : JSON.stringify(this.proxy._values)
           const res = await fetch(url, {
@@ -36,7 +37,7 @@ export default function store(deliver, replicate, form, onRequest, onResponse) {
             headers,
             body
           })
-          onResponse ? await onResponse(res) : this.bus.local.sentMessage
+          return onResponse ? await onResponse(res) : this.bus.local.sentMessage
         } catch (err) {
           return this.bus.local.errorMessage
         }

@@ -39,6 +39,7 @@ export default {
         },
         _attr: {
           size: this.param.size,
+          title: this.param.options.title,
           readonly: this.param.options.readonly,
           required: this.param.options.required,
           minlength: this.param.options.minlength,
